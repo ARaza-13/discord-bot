@@ -1,3 +1,4 @@
+require("dotenv").config(); // access the token from .env file
 const { Client, IntentsBitField } = require("discord.js");
 
 // create a bot instance
@@ -27,6 +28,4 @@ client.on("messageCreate", (message) => {
   }
 });
 
-client.login(
-  "MTIyMDQ1NjExNjQyNTcyMzkzNA.GnBzbD.GeebcYnow3cYEnS24Jx18SXd9jbdUOwdn5lShg",
-);
+client.login(process.env.TOKEN);
