@@ -1,3 +1,1 @@
-# template-webpack-eslint-prettier
-
-basic html, css, js template that includes Webpack startup along with ESLint and Prettier setup
+Basic discord bot created to read user messages and reply back with automated message
