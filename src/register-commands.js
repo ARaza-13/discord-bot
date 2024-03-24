@@ -4,7 +4,7 @@ const { REST, Routes } = require("discord.js");
 const commands = [
   {
     name: "hey",
-    description: "Replies with hey!",
+    description: "Replies saying hey!",
   },
   {
     name: "say_my_name",
@@ -28,6 +28,21 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
     );
 
     console.log("Slash commands were registered successfully");
+  } catch (error) {
+    console.log(`There was an error: ${error}`);
+  }
+})();
+
+// Deleting global slash commands
+(async () => {
+  try {
+    console.log("Deleting global slash commands...");
+
+    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+      body: [],
+    });
+
+    console.log("Global Slash commands were successfully deleted");
   } catch (error) {
     console.log(`There was an error: ${error}`);
   }

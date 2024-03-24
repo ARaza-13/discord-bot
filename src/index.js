@@ -28,8 +28,9 @@ client.on("messageCreate", (message) => {
   }
 });
 
+// listens to interaction event listeners whenever a slash command is ran
 client.on("interactionCreate", (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
+  if (!interaction.isChatInputCommand()) return; // if interaction is not a slash command, exit the function
 
   if (interaction.commandName === "hey") {
     interaction.reply("hey!");
