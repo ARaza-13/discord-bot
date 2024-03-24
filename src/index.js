@@ -1,5 +1,5 @@
 require("dotenv").config(); // access the token from .env file
-const { Client, IntentsBitField } = require("discord.js");
+const { Client, IntentsBitField, EmbedBuilder } = require("discord.js");
 
 // create a bot instance
 const client = new Client({
@@ -38,6 +38,32 @@ client.on("interactionCreate", (interaction) => {
 
   if (interaction.commandName === "say_my_name") {
     interaction.reply("you're Heisenberg");
+  }
+
+  if (interaction.commandName === "embed") {
+    const embed = new EmbedBuilder()
+      .setTitle("Embed Title")
+      .setDescription("This is an embed description")
+      .setColor("Random")
+      .addFields(
+        {
+          name: "Field Title",
+          value: "Some random value",
+          inline: true,
+        },
+        {
+          name: "2nd Field Title",
+          value: "Some random value",
+          inline: true,
+        },
+        {
+          name: "3rd Field Title",
+          value: "Some random value",
+          inline: true,
+        },
+      );
+
+    interaction.reply({ embeds: [embed] });
   }
 
   if (interaction.commandName === "add") {

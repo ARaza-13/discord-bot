@@ -11,6 +11,10 @@ const commands = [
     description: "Say my name.",
   },
   {
+    name: "embed",
+    description: "Sends an embed!",
+  },
+  {
     name: "add",
     description: "Adds two numbers.",
     options: [
