@@ -1,5 +1,5 @@
 require("dotenv").config(); // access bot and server ID from .env file
-const { REST, Routes } = require("discord.js");
+const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
 const commands = [
   {
@@ -7,8 +7,26 @@ const commands = [
     description: "Replies saying hey!",
   },
   {
-    name: "say_my_name",
-    description: "you're heisenberg",
+    name: "say-my-name",
+    description: "Say my name.",
+  },
+  {
+    name: "add",
+    description: "Adds two numbers.",
+    options: [
+      {
+        name: "first-number",
+        description: "The first number.",
+        type: ApplicationCommandOptionType.Number,
+        required: true,
+      },
+      {
+        name: "second-number",
+        description: "The second number.",
+        type: ApplicationCommandOptionType.Number,
+        required: true,
+      },
+    ],
   },
 ];
 
@@ -34,16 +52,16 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 })();
 
 // Deleting global slash commands
-(async () => {
-  try {
-    console.log("Deleting global slash commands...");
+// (async () => {
+//   try {
+//     console.log("Deleting global slash commands...");
 
-    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
-      body: [],
-    });
+//     await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+//       body: [],
+//     });
 
-    console.log("Global Slash commands were successfully deleted");
-  } catch (error) {
-    console.log(`There was an error: ${error}`);
-  }
-})();
+//     console.log("Global Slash commands were successfully deleted");
+//   } catch (error) {
+//     console.log(`There was an error: ${error}`);
+//   }
+// })();
