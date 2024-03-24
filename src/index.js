@@ -34,6 +34,10 @@ client.on("interactionCreate", (interaction) => {
   if (interaction.commandName === "hey") {
     interaction.reply("hey!");
   }
+
+  if (interaction.commandName === "say_my_name") {
+    interaction.reply("you're Heisenberg");
+  }
 });
 
 client.login(process.env.TOKEN);

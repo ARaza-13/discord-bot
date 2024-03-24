@@ -6,6 +6,10 @@ const commands = [
     name: "hey",
     description: "Replies with hey!",
   },
+  {
+    name: "say_my_name",
+    description: "you're heisenberg",
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
