@@ -26,9 +26,14 @@ const roles = [
   },
 ];
 
-// listens when the bot is ready
-client.on("ready", (c) => {
-  console.log(`✅ ${c.user.tag} is online.`);
+// send the message with the button roles when the bot comes online
+client.on("ready", async (c) => {
+  try {
+    const channel = await client.channels.cache.get("1221912016265019502");
+    if (!channel) return;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 client.login(process.env.TOKEN);
