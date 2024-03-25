@@ -38,8 +38,9 @@ client.on("ready", async (c) => {
     const channel = await client.channels.cache.get("1221912016265019502");
     if (!channel) return;
 
-    const row = new ActionRowBuilder();
+    const row = new ActionRowBuilder(); // each row can have a max of 5 buttons
 
+    // push a component inside the row for every role defined
     roles.forEach((role) => {
       row.components.push(
         new ButtonBuilder()
@@ -48,6 +49,13 @@ client.on("ready", async (c) => {
           .setStyle(ButtonStyle.Primary),
       );
     });
+
+    // send the message into the channel
+    await channel.send({
+      content: "Claim or remove a role below.",
+      components: [row],
+    });
+    process.exit(); // exit out the file once the message has been sent
   } catch (error) {
     console.log(error);
   }
