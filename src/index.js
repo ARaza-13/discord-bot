@@ -29,17 +29,20 @@ client.on("messageCreate", (message) => {
 });
 
 // listens to interaction event listeners whenever a slash command is ran
-client.on("interactionCreate", (interaction) => {
+client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return; // if interaction is not a slash command, exit the function
 
+  // slash command: hey
   if (interaction.commandName === "hey") {
     interaction.reply("hey!");
   }
 
-  if (interaction.commandName === "say_my_name") {
+  // slash command: say my name
+  if (interaction.commandName === "say-my-name") {
     interaction.reply("you're Heisenberg");
   }
 
+  // slash command: emded
   if (interaction.commandName === "embed") {
     const embed = new EmbedBuilder()
       .setTitle("Embed Title")
@@ -56,21 +59,31 @@ client.on("interactionCreate", (interaction) => {
           value: "Some random value",
           inline: true,
         },
-        {
-          name: "3rd Field Title",
-          value: "Some random value",
-          inline: true,
-        },
       );
 
     interaction.reply({ embeds: [embed] });
   }
 
+  // slash command: add
   if (interaction.commandName === "add") {
     const num1 = interaction.options.get("first-number").value;
     const num2 = interaction.options.get("second-number").value;
 
     interaction.reply(`The sum is ${num1 + num2}`);
+  }
+
+  // button command: claim/drop roles
+  if (interaction.isButton()) {
+    await interaction.deferReply({ emphemeral: true }); // give user the message that the bot is thinking
+
+    const role = interaction.guild.roles.cache.get(interaction.customId);
+    // check to see if role exists
+    if (!role) {
+      interaction.editReply({
+        content: "I couldn't find that role.",
+      });
+      return;
+    }
   }
 });
 
