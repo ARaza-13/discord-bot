@@ -1,5 +1,11 @@
 require("dotenv").config(); // access the token from .env file
-const { Client, IntentsBitField, EmbedBuilder } = require("discord.js");
+const {
+  Client,
+  IntentsBitField,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} = require("discord.js");
 
 // create a bot instance
 const client = new Client({
@@ -31,6 +37,17 @@ client.on("ready", async (c) => {
   try {
     const channel = await client.channels.cache.get("1221912016265019502");
     if (!channel) return;
+
+    const row = new ActionRowBuilder();
+
+    roles.forEach((role) => {
+      row.components.push(
+        new ButtonBuilder()
+          .setCustomId(role.id)
+          .setLabel(role.label)
+          .setStyle(ButtonStyle.Primary),
+      );
+    });
   } catch (error) {
     console.log(error);
   }
