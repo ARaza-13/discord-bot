@@ -1,5 +1,10 @@
 require("dotenv").config(); // access the token from .env file
-const { Client, IntentsBitField, EmbedBuilder } = require("discord.js");
+const {
+  Client,
+  IntentsBitField,
+  EmbedBuilder,
+  ActivityType,
+} = require("discord.js");
 
 // create a bot instance
 const client = new Client({
@@ -14,6 +19,12 @@ const client = new Client({
 // listens when the bot is ready
 client.on("ready", (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
+
+  client.user.setActivity({
+    name: "Breaking Bad S1 E1 40:06",
+    type: ActivityType.Streaming,
+    url: "https://www.youtube.com/watch?v=sBPtJDgNxIE",
+  });
 });
 
 // triggers even listener whenever new message is sent that the bot can see
