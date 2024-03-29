@@ -16,15 +16,32 @@ const client = new Client({
   ],
 });
 
+let status = [
+  {
+    name: "Breaking Bad S1 E1 40:06",
+    type: ActivityType.Streaming,
+    url: "https://www.youtube.com/watch?v=sBPtJDgNxIE",
+  },
+  {
+    name: "Breaking Bad S4 E8 27:07",
+    type: ActivityType.Streaming,
+    url: "https://www.youtube.com/watch?v=4JqR6sQP-JE",
+  },
+  {
+    name: "Breaking Bad S2 E3",
+    type: ActivityType.Streaming,
+    url: "https://www.youtube.com/watch?v=Myt9ybv0IaU",
+  },
+];
+
 // listens when the bot is ready
 client.on("ready", (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
 
-  client.user.setActivity({
-    name: "Breaking Bad S1 E1 40:06",
-    type: ActivityType.Streaming,
-    url: "https://www.youtube.com/watch?v=sBPtJDgNxIE",
-  });
+  setInterval(() => {
+    let random = Math.floor(Math.random() * status.length); // generate a random number that's less than the lenght of the status array
+    client.user.setActivity(status[random]);
+  }, 1800000);
 });
 
 // triggers even listener whenever new message is sent that the bot can see
