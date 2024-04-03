@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
   ActivityType,
 } = require("discord.js");
+const eventHandler = require("./handlers/eventHandler");
 
 // create a bot instance
 const client = new Client({
@@ -15,6 +16,8 @@ const client = new Client({
     IntentsBitField.Flags.MessageContent, // bot will be able to read messages inside the server
   ],
 });
+
+eventHandler(client);
 
 let status = [
   {
