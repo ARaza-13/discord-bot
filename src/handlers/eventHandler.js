@@ -8,6 +8,8 @@ module.exports = (client) => {
   // import all the files inside of each respective event folder
   for (const eventFolder of eventFolders) {
     const eventFiles = getAllFiles(eventFolder);
+    eventFiles.sort((a, b) => a > b); // sorts the files in order
+    console.log(eventFiles);
 
     // get the name of the event based on the folder name
     const eventName = eventFolder.replace(/\\/g, "/").split("/").pop(); // gets the last array element, which will be the folder name
