@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = (directory, foldersOnly = false) => {
+  // if foldersOnly is true, then we're only returning folders from a specific path
   let fileNames = [];
 
   // import any folders/files from a specific directory
