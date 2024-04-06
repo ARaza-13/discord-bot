@@ -1,6 +1,7 @@
-const { ApplicationCommandOptionType, PermissionFlagBits } = require(
-  discord.js,
-);
+const {
+  ApplicationCommandOptionType,
+  PermissionFlagsBits,
+} = require("discord.js");
 
 module.exports = {
   name: "ban",
@@ -20,7 +21,7 @@ module.exports = {
       type: ApplicationCommandOptionType.String,
     },
   ],
-  permissionsRequired: [PermissionFlagBits.Administrator],
+  permissionsRequired: [PermissionFlagsBits.Administrator],
 
   callback: (client, interaction) => {
     interaction.reply(`ban...`);
