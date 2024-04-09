@@ -19,9 +19,8 @@ module.exports = {
 
     await interaction.deferReply();
 
+    // get the target user object and check if they're still in the server
     const targetUser = await interaction.guild.members.fetch(targetUserId);
-
-    // check if the user is still in the server
     if (!targetUser) {
       await interaction.editReply("That user doesn't exist in this server.");
       return;
@@ -35,12 +34,12 @@ module.exports = {
       return;
     }
 
+    // check the role positions of the target user, request user, and the bot user
     const targetUserRolePosition = targetUser.roles.highest.position; // highest role of the target role
     const requestUserRolePosition = interaction.member.roles.highest.position; // highest role of the user running the command
     const botRolePermissions =
       interaction.guild.members.me.roles.highest.position; // highest role of the bot
 
-    // check highest role position between target user, user executing command, and the bot
     if (targetUserRolePosition >= requestUserRolePosition) {
       await interaction.editReply(
         "You can't kick that user because they have the same/higher role than you.",
