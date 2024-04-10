@@ -1,6 +1,7 @@
 const { Client, Message } = require("discord.js");
 const Level = require("../../models/Level");
 const calculateLevelXp = require("../../utils/calculateLevelXp");
+const cooldowns = new Set();
 
 function getRandomXp(min, max) {
   min = Math.ceil(min);
@@ -15,8 +16,13 @@ function getRandomXp(min, max) {
  * @param {Message} message
  */
 module.exports = async (client, message) => {
-  // check if message is actually from within a server or if message author is a bot
-  if (!message.inGuild() || message.author.bot) return;
+  // check if message is actually from within a server, if message author is a bot, or if message author is on cooldown
+  if (
+    !message.inGuild() ||
+    message.author.bot ||
+    cooldowns.has(message.author.id)
+  )
+    return;
 
   // define the xp to give to user for their message
   const xpToGive = getRandomXp(5, 15);
@@ -51,6 +57,11 @@ module.exports = async (client, message) => {
         console.log(`Error saving updated level ${e}`);
         return;
       });
+      // give user 30s cooldown
+      cooldowns.add(message.author.id);
+      setTimeout(() => {
+        cooldowns.delete(message.author.id);
+      }, 30000);
     }
 
     // (!level)
@@ -63,6 +74,11 @@ module.exports = async (client, message) => {
       });
 
       await newLevel.save();
+      // give user 30s cooldown
+      cooldowns.add(message.author.id);
+      setTimeout(() => {
+        cooldowns.delete(message.author.id);
+      }, 30000);
     }
   } catch (error) {
     console.log(`Error giving xp: ${error}`);
