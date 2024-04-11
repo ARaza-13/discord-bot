@@ -7,6 +7,7 @@ const {
 const ms = require("ms");
 
 module.exports = {
+  // import Client and Interaction intellisense from discord.js
   /**
    *
    * @param {Client} client
