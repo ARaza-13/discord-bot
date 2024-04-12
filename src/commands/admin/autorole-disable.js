@@ -1,11 +1,5 @@
-const {
-  ApplicationCommandOptionType,
-  Client,
-  Interaction,
-  PermissionFlagsBits,
-} = require("discord.js");
+const { Client, Interaction, PermissionFlagsBits } = require("discord.js");
 const AutoRole = require("../../models/AutoRole");
-const { permissionsRequired } = require("./autorole-configure");
 
 module.exports = {
   // import Client and Interaction intellisense from discord.js
