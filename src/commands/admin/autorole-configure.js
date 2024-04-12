@@ -53,7 +53,7 @@ module.exports = {
         "Autorole has been configured. To disable, run `/autorole-disable` ",
       );
     } catch (error) {
-      console.log(`There was an error running this command: ${error}`);
+      console.log(`Error with /autorole-configure: ${error}`);
     }
   },
 
